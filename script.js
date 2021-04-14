@@ -10,9 +10,7 @@ const small_film_set = [
 webix.protoUI({
     name:"mybutton",
     $init: function (config) {
-        console.log(config.value)
         config.value = config.states[0],
-        console.log(config.value)
         webix.html.addCss( this.$view, "off");
         this.attachEvent("onItemClick", function(){
             config.state++;
@@ -29,7 +27,44 @@ webix.protoUI({
     },  
 }, webix.ui.button);
 
+webix.protoUI({
+    name: "myform",
+    $init: function (config) {
+        const elements = [];
+        for (let i = 0; i < config.fields.length; i++) {
+            elements.push({
+                view: "text",
+                label: config.fields[i],
+                name: config.fields[i].toLowerCase()
+            });
+        }
+        elements.push({
+            cols: [{
+                view: "button",
+                value: "Cancel",
+                click: config.cancelAction || this.defaults.cancelAction
+            },
+            {},
+            {
+                view: "button",
+                value: "Save",
+                css: "webix_primary",
+                click: config.saveAction ||  this.defaults.saveAction
+            }
+            ]
+        });
+        config.elements = elements;
+    },
 
+    defaults: {
+        cancelAction: function () {
+            webix.message("default Clear");
+        },
+        saveAction: function () {
+            webix.message("default Save");
+        }
+    },
+}, webix.ui.form);
 
 const listView = {
     rows:[
@@ -74,7 +109,10 @@ const listView = {
 
 const form = {
     view: "myform",
-    fields: ["one", "two", "three"]
+    fields: ["Fname", "Lname", "Address"],
+    saveAction: function() {
+        webix.message("form Save");
+    },
 }
 
 webix.ui({
