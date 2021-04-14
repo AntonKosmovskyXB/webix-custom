@@ -1,0 +1,14 @@
+ .off .webix_button{
+    background: #96ffc5;
+    color: #000;
+}
+
+.sortAsc .webix_button {
+    background: #ff9292;
+    color: #000;
+}
+
+.sortDesc .webix_button {
+    background: #fffd78;
+    color: #000;
+}
