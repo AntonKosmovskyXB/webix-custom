@@ -119,7 +119,7 @@ const listView = {
 const form = {
     view: "myform",
     id: "myForm",
-    fields: ["Lname", "lname", "test"],
+    fields: ["Fname", "Lname", "Address"],
     saveAction: function() {
         const formValues = $$("myForm").getValues()
         for (key in formValues) {
