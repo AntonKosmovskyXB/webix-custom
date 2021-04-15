@@ -31,8 +31,8 @@ webix.protoUI({
     $init: function (config) {
         const elements = [];
         for (let i = 0; i < config.fields.length; i++) {
-            if (config.fields[i] === config.fields[i-1]) {
-                webix.message("Please, add non-repeating fields in the form")
+            if (elements.find(item => item.label === config.fields[i].toLowerCase())) {
+                webix.message("Please, add non-repeating fields in the form");
             } else {
                 elements.push({
                     view: "text",
