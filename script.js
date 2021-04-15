@@ -19,6 +19,19 @@ webix.protoUI({
                 this.config.state = 0;
             }
 
+            if (this.config.state === 0) {
+                webix.html.removeCss( this.$view, "sortDesc");
+                webix.html.addCss( this.$view, "off");
+            }
+            if (this.config.state === 1) {
+                webix.html.removeCss( this.$view, "off");
+                webix.html.addCss( this.$view, "sortAsc");
+            }
+            if (this.config.state === 2) {
+                webix.html.removeCss( this.$view, "sortAsc");
+                webix.html.addCss( this.$view, "sortDesc");
+            }
+
             this.config.value = this.config.states[this.config.state];
             this.refresh();
             this.callEvent("onStateChange", [this.config.state]);
@@ -80,21 +93,14 @@ const listView = {
                 onStateChange:function(state){
                     if (state === 0) {
                         $$("filmsList").sort("#rank#");
-                        webix.html.removeCss( this.$view, "sortDesc");
-                        webix.html.addCss( this.$view, "off");
                     }
 
                     if (state === 1) {
                         $$("filmsList").sort("#year#", "asc");
-                        webix.html.removeCss( this.$view, "off");
-                        webix.html.addCss( this.$view, "sortAsc");
-
                     }
 
                     if (state === 2) {
                         $$("filmsList").sort("#year#", "desc");
-                        webix.html.removeCss( this.$view, "sortAsc");
-                        webix.html.addCss( this.$view, "sortDesc");
                     }
                 }
             } 
@@ -112,10 +118,17 @@ const listView = {
 
 const form = {
     view: "myform",
+    id: "myForm",
     fields: ["Fname", "Lname", "Address"],
     saveAction: function() {
-        webix.message("form Save");
+        const formValues = $$("myForm").getValues()
+        for (key in formValues) {
+            webix.message(formValues[key])
+        }
     },
+    cancelAction: function() {
+        $$("myForm").clear();
+    }
 }
 
 webix.ui({
