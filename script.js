@@ -44,7 +44,7 @@ webix.protoUI({
     $init: function (config) {
         const elements = [];
         for (let i = 0; i < config.fields.length; i++) {
-            if (elements.find(item => item.label === config.fields[i].toLowerCase())) {
+            if (elements.find(item => item.name === config.fields[i].toLowerCase())) {
                 webix.message("Please, add non-repeating fields in the form");
             } else {
                 elements.push({
@@ -119,7 +119,7 @@ const listView = {
 const form = {
     view: "myform",
     id: "myForm",
-    fields: ["Fname", "Lname", "Address"],
+    fields: ["Lname", "lname", "test"],
     saveAction: function() {
         const formValues = $$("myForm").getValues()
         for (key in formValues) {
