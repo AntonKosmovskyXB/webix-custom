@@ -73,11 +73,11 @@ webix.protoUI({
     },
 
     defaults: {
-        cancelAction: function () {
-            webix.message("default Clear");
-        },
-        saveAction: function () {
+        saveAction: function() {
             webix.message("default Save");
+        },
+        cancelAction: function() {
+            this.getParentView().getParentView().clear();
         }
     },
 }, webix.ui.form);
@@ -121,14 +121,11 @@ const form = {
     id: "myForm",
     fields: ["Fname", "Lname", "Address"],
     saveAction: function() {
-        const formValues = $$("myForm").getValues()
+        const formValues = $$("myForm").getValues();
         for (key in formValues) {
             webix.message(formValues[key])
         }
     },
-    cancelAction: function() {
-        $$("myForm").clear();
-    }
 }
 
 webix.ui({
