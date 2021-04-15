@@ -13,14 +13,13 @@ webix.protoUI({
         config.value = config.states[0],
         webix.html.addCss( this.$view, "off");
         this.attachEvent("onItemClick", function(){
-            config.state++;
+            this.config.state++;
 
-            if (config.state === 3) {
-                config.state = 0;
+            if (this.config.state === 3) {
+                this.config.state = 0;
             }
 
-            this.config.state = config.state;
-            this.config.value = this.config.states[config.state];
+            this.config.value = this.config.states[this.config.state];
             this.refresh();
             this.callEvent("onStateChange", [this.config.state]);
         })
@@ -32,11 +31,15 @@ webix.protoUI({
     $init: function (config) {
         const elements = [];
         for (let i = 0; i < config.fields.length; i++) {
-            elements.push({
-                view: "text",
-                label: config.fields[i],
-                name: config.fields[i].toLowerCase()
-            });
+            if (config.fields[i] === config.fields[i-1]) {
+                webix.message("Please, add non-repeating fields in the form")
+            } else {
+                elements.push({
+                    view: "text",
+                    label: config.fields[i],
+                    name: config.fields[i].toLowerCase()
+                });
+            }
         }
         elements.push({
             cols: [{
