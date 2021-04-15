@@ -77,7 +77,7 @@ webix.protoUI({
             webix.message("default Save");
         },
         cancelAction: function() {
-            this.getParentView().getParentView().clear();
+            this.getFormView().clear();
         }
     },
 }, webix.ui.form);
